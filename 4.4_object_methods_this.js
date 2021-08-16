@@ -2,17 +2,17 @@
 // Метод -- функция, которая находится в объекте в качестве свойства
 
 let methodObject = {
-    sayHi: function () {
-        // или просто sayHi(){}
-        console.log("Hi");
-    },
+  sayHi: function () {
+    // или просто sayHi(){}
+    console.log("Hi");
+  },
 };
 // methodObject.sayHi() --> Hi one
 
 //Кроме того, можно сначала создать функцию, а потом добавить в методы:
 
 function sayBye() {
-    console.log("Bye");
+  console.log("Bye");
 }
 
 methodObject.sayBye = sayBye; //важно передавать без скобок, мы передаём ссылку, ничего не вызываем.
@@ -25,37 +25,37 @@ methodObject.sayBye = sayBye; //важно передавать без скоб�
 // произойдёт неприятность
 
 let thisObj = {
-    name: "Object Name",
-    sayWhoAreYou() {
-        console.log(this.name);
-        console.log(thisObj.name);
-    },
+  name: "Object Name",
+  sayWhoAreYou() {
+    console.log(this.name);
+    console.log(thisObj.name);
+  },
 };
-// thisObj.sayWhoAreYou() --> 'Object Name/Object Name'
+// thisObj.sayWhoAreYou() //--> 'Object Name/Object Name'
 
 let newThisObj = thisObj;
 
 thisObj = {};
 
-// newThisObj.sayWhoAreYou() --> Object Name undefined
+// newThisObj.sayWhoAreYou() //--> Object Name undefined
 
 // Контекст выполнения
 
 // Мы можем написать функцию с применением this вне объекта, это не будет ошибкой
 // This для функции определяется в момент вызова
 
-let firstUser = {name: "Hanna"};
-let secondUser = {name: "Piotr"};
+let firstUser = { name: "Hanna" };
+let secondUser = { name: "Piotr" };
 
 let sayHello = function () {
-    console.log(this.name);
+  console.log(this.name);
 };
 
 firstUser.sayHi = sayHello;
 secondUser.sayHi = sayHello;
 
-// firstUser.sayHi() --> Hanna
-// secondUser['sayHi']() --> Piotr
+// firstUser.sayHi() //--> Hanna
+// secondUser['sayHi']() //--> Piotr
 
 //Если вызовем this вне объекта, получим undefined (если use strict -- ошибку)
 
@@ -68,21 +68,21 @@ secondUser.sayHi = sayHello;
 // При любой другой операции кроме прямого вызова (например, присваивание), передаётся не ссылочный тип, а только тело функции:
 
 let objToDoMethod = {
-    primeForMethod: "method",
-    doMethod: function () {
-        console.log(`I have done the ${this.primeForMethod}`);
-    },
-    notDoMethod: function f() {
-        console.log(`I have NOT done the ${this.primeForMethod}`);
-    },
+  primeForMethod: "method",
+  doMethod: function () {
+    console.log(`I have done the ${this.primeForMethod}`);
+  },
+  notDoMethod: function f() {
+    console.log(`I have NOT done the ${this.primeForMethod}`);
+  },
 };
 
 let newDoMethod = objToDoMethod.doMethod; //передалось тело функции. Контекст эта функция возьмёт там, где будет вызвана.
-// newDoMethod() --> I have done the undefined
+// newDoMethod() //--> I have done the undefined
 
 // (objToDoMethod.primeForMethod === "methodika"
 //   ? objToDoMethod.doMethod
-//   : objToDoMethod.notDoMethod)(); --> I have NOT done the undefined -- this потрялось
+//   : objToDoMethod.notDoMethod)(); //--> I have NOT done the undefined -- this потрялось
 
 // Условный оператор -- это не прямой вызов, поэтому контекст потерялся. Наверное
 
@@ -98,7 +98,7 @@ let newDoMethod = objToDoMethod.doMethod; //передалось тело фун
 //   },
 // }
 
-// (user3.go)() --> Джон
+// (user3.go)() //--> Джон
 // Вообще там должен был быть подвох и ошибка, потому что пропущена точка с запятой в конце строки и стало похоже на функцию
 // некорректно, но Prettier всё за меня порешал
 
@@ -123,10 +123,10 @@ let newDoMethod = objToDoMethod.doMethod; //передалось тело фун
 // Каким будет результат при обращении к свойству объекта ref? Почему?
 
 function makeUser() {
-    return {
-        name2: "Джон",
-        ref: this,
-    };
+  return {
+    name2: "Джон",
+    ref: this,
+  };
 }
 
 let user4 = makeUser();
@@ -149,21 +149,21 @@ let user4 = makeUser();
 // mul() (умножить) перемножает сохранённые значения и возвращает результат.
 
 let calculator = {
-    read(num1, num2) {
-        this.num1 = num1;
-        this.num2 = num2;
-    },
-    sum() {
-        return this.num1 + this.num2;
-    },
-    mul() {
-        return this.num1 * this.num2;
-    },
+  read(num1, num2) {
+    this.num1 = num1;
+    this.num2 = num2;
+  },
+  sum() {
+    return this.num1 + this.num2;
+  },
+  mul() {
+    return this.num1 * this.num2;
+  },
 };
 
 calculator.read(3, 4);
-// console.log(calculator.sum()) --> 7
-// console.log(calculator.mul()) --> 12
+// console.log(calculator.sum()) //--> 7
+// console.log(calculator.mul()) //--> 12
 
 //Задание 10:
 
@@ -171,19 +171,19 @@ calculator.read(3, 4);
 // Здесь ladder уже переделан в решение (добавлены return)
 
 let ladder = {
-    step: 0,
-    up() {
-        this.step++;
-        return this;
-    },
-    down() {
-        this.step--;
-        return this;
-    },
-    showStep: function () {
-        // показывает текущую ступеньку
-        console.log(this.step);
-    },
+  step: 0,
+  up() {
+    this.step++;
+    return this;
+  },
+  down() {
+    this.step--;
+    return this;
+  },
+  showStep: function () {
+    // показывает текущую ступеньку
+    console.log(this.step);
+  },
 };
 
 //Теперь, если нам нужно сделать несколько последовательных вызовов, мы можем выполнить это так:
@@ -195,4 +195,4 @@ let ladder = {
 
 //Измените код методов up, down и showStep таким образом, чтобы их вызов можно было сделать по цепочке, например так:
 
-// ladder.up().up().down().up().showStep(); --> 2
+// ladder.up().up().down().up().showStep(); //--> 2

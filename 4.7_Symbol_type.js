@@ -7,8 +7,8 @@
 let id4 = Symbol();
 
 let obj = {
-    id4: 123, //мы просто задали имя ключу без ссылки на переменную
-    [id4]: 456, //теперь нормально
+  id4: 123, //мы просто задали имя ключу без ссылки на переменную
+  [id4]: 456, //теперь нормально
 };
 
 // console.log(obj); --> {id4: 123, Symbol(): 456}
@@ -17,10 +17,10 @@ let obj = {
 
 let lizardId = Symbol();
 let lizard = {
-    name: "Nagajna",
-    [lizardId]: 123,
-    tail: true,
-    food: "insects",
+  name: "Nagajna",
+  [lizardId]: 123,
+  tail: true,
+  food: "insects",
 };
 
 // for (let elem in lizard) {
@@ -39,9 +39,9 @@ let lizard = {
 let idOne = Symbol.for("idishnik"); // --> такого ключа ещё нет, занесли в реестр
 let idTwo = Symbol.for("idishnik"); // --> такой ключ уже есть, использовали его
 
-// console.log(idOne === idTwo); --> true
+// console.log(idOne === idTwo); //--> true
 
 //Обратный Symbol.for(key) метод: Symbol.keyFor(sym) -- принимает символ, возвращает ключ
-// console.log(Symbol.keyFor(idOne)); --> idishnik
+// console.log(Symbol.keyFor(idOne)); //--> idishnik
 
 //Системные символы обещали разобрать в других главах

@@ -3,9 +3,9 @@
 //Называется с большой буквы и с помощью слова new
 
 function MakeCat(name) {
-    this.legs = 4;
-    this.tail = true;
-    this.name = name;
+  this.legs = 4;
+  this.tail = true;
+  this.name = name;
 }
 
 let newCat = new MakeCat("barsik");
@@ -15,8 +15,8 @@ let newCat = new MakeCat("barsik");
 // можно вывать функцию-конструктор и сразу записать её в переменную, но переиспользовать эту конструкцию будет невозможно
 
 let compliCat = new (function () {
-    this.legs = 3;
-    this.love = Infinity;
+  this.legs = 3;
+  this.love = Infinity;
 })();
 
 //Скобки вокруг функции и скобки вызова добавил Prettier. По идее должно работать и без них
@@ -27,14 +27,14 @@ let compliCat = new (function () {
 //В конструкторах, разумеется, можно создавать методы:
 
 function MakeDog(name) {
-    this.name = name;
-    this.bark = function () {
-        console.log(`Bark! I'm ${name}. Bark!`);
-    };
+  this.name = name;
+  this.bark = function () {
+    console.log(`Bark! I'm ${name}. Bark!`);
+  };
 }
 
 let newDog = new MakeDog("Barbos");
-// newDog.bark(); --> Bark! I'm Barbos. Bark!
+// newDog.bark(); //--> Bark! I'm Barbos. Bark!
 
 //Задание 10:
 
@@ -44,17 +44,17 @@ let newDog = new MakeDog("Barbos");
 let newObj = {};
 
 function A() {
-    return newObj;
+  return newObj;
 }
 
 function B() {
-    return newObj;
+  return newObj;
 }
 
 let a = new A();
 let b = new B();
 
-// console.log(a === b); --> true, так как обе функции возвращают один объект.
+// console.log(a === b); //--> true, так как обе функции возвращают один объект.
 
 //Задание 11:
 
@@ -65,22 +65,22 @@ let b = new B();
 // mul() возвращает произведение введённых свойств.
 
 let Calculator2 = function () {
-    this.read = function (num1, num2) {
-        this.num1 = num1;
-        this.num2 = num2;
-    };
-    this.mul = function () {
-        return this.num1 * this.num2;
-    };
-    this.sum = function () {
-        return this.num1 + this.num2;
-    };
+  this.read = function (num1, num2) {
+    this.num1 = num1;
+    this.num2 = num2;
+  };
+  this.mul = function () {
+    return this.num1 * this.num2;
+  };
+  this.sum = function () {
+    return this.num1 + this.num2;
+  };
 };
 
 let newCalc2 = new Calculator2();
 newCalc2.read(6, 9);
-// console.log(newCalc2.mul()); --> 54
-// console.log(newCalc2.sum()); --> 15
+// console.log(newCalc2.mul()); //--> 54
+// console.log(newCalc2.sum()); //--> 15
 
 //Задание 12:
 //Напишите функцию-конструктор Accumulator(startingValue).
@@ -92,13 +92,13 @@ newCalc2.read(6, 9);
 // Таким образом, свойство value является текущей суммой всего, что ввёл пользователь при вызовах метода read(), с учётом начального значения startingValue.
 
 let Accumulator = function (startingValue) {
-    this.value = startingValue;
-    this.read = function (addedValue) {
-        this.value += addedValue;
-    };
+  this.value = startingValue;
+  this.read = function (addedValue) {
+    this.value += addedValue;
+  };
 };
 
 let accum = new Accumulator(5);
 accum.read(40);
 accum.read(7);
-// console.log(accum.value); --> 52
+// console.log(accum.value); //--> 52
