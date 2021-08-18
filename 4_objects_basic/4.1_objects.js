@@ -31,12 +31,12 @@ delete user.name;
 //Задание 2:
 //.Напишите функцию isEmpty(obj), которая возвращает true, если у объекта нет свойств, иначе false.
 
-let isEmpty = (obj) => {
+let isEmpty = ({ elem }) => {
   let counter = 0;
   for (let elem in obj) {
     counter++;
   }
-  return Boolean(counter);
+  return !!counter;
 };
 isEmpty({});
 
