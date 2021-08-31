@@ -1,10 +1,10 @@
 //Генераторы
 
 function* newGenerator() {
-    yield 1;
-    yield 2;
-    yield 3;
-    return 4;
+  yield 1;
+  yield 2;
+  yield 3;
+  return 4;
 }
 
 let gen = newGenerator();
@@ -24,13 +24,13 @@ let gen = newGenerator();
 //Сделаем итератор при помощи функции-генератора
 
 let range = {
-    from: 1,
-    to: 5,
-    * [Symbol.iterator]() {
-        for (let val = this.from; val <= this.to; val++) {
-            yield val;
-        }
-    },
+  from: 1,
+  to: 5,
+  *[Symbol.iterator]() {
+    for (let val = this.from; val <= this.to; val++) {
+      yield val;
+    }
+  },
 };
 
 // console.log([...range]); //[1, 2, 3, 4, 5]
@@ -38,19 +38,19 @@ let range = {
 // Вложим генераторы один в другой
 
 function* passGen(start, end) {
-    for (let i = start; i <= end; i++) yield i;
+  for (let i = start; i <= end; i++) yield i;
 }
 
 function* generatePassword() {
-    yield* passGen(48, 57);
-    yield* passGen(65, 90);
-    yield* passGen(97, 122);
+  yield* passGen(48, 57);
+  yield* passGen(65, 90);
+  yield* passGen(97, 122);
 }
 
 let password = "";
 
 for (let code of generatePassword()) {
-    password += String.fromCharCode(code);
+  password += String.fromCharCode(code);
 }
 
 // console.log(password); //0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
@@ -58,25 +58,44 @@ for (let code of generatePassword()) {
 //yield -- дорога в обе стороны
 
 function* auf() {
-    let res = yield "2 + 2 = ?";
-    console.log(res);
+  let res = yield "2+2 = ?";
+  console.log(res);
+  let res2 = yield "3+3 = ?";
+  console.log(res2);
 }
 
 let wolf = auf();
-let question = wolf.next().value;
+wolf.next();
+wolf.next(4);
+wolf.next(9);
 
-wolf.next(4); //4
+function* gen2() {
+  try {
+    let result = yield; // (1)
+    console.log(
+      "Выполнение программы не дойдёт до этой строки, потому что выше возникнет исключение"
+    );
+  } catch (e) {
+    console.log(e); // покажет ошибку
+  }
+}
+
+let generator2 = gen2();
+
+let question = generator2.next().value;
+
+generator2.throw(new Error("Ответ не найден в моей базе данных")); // (2)
 
 //Задача 1:
 
 //Создать функцию-генератор псевдослучайных чисел
 
 function* pseudoRandom(seed) {
-    let val = seed;
-    while (true) {
-        val = (val * 16807) % 2147483647;
-        yield val;
-    }
+  let val = seed;
+  while (true) {
+    val = (val * 16807) % 2147483647;
+    yield val;
+  }
 }
 
 let generator = pseudoRandom(1);
